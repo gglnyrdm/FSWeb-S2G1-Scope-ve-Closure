@@ -30,10 +30,11 @@ console.log('örnek görev:', ilkiniDon(['as','sa'],function(metin){return metin
   Aşağıdaki skor1 ve skor2 kodlarını inceleyiniz ve aşağıdaki soruları altına not alarak cevaplayın
   
   1. skor1 ve skor2 arasındaki fark nedir?
-  
+ skor1 closure kullanıp parent ındaki skorArtırıcı fonksiyonunun içindeki skorGüncelle fonksiyonunu return eder. Skor 2 doğrudan global scope da tanımlanmış skor değerini return eder.
   2. Hangisi bir closure kullanmaktadır? Nasıl tarif edebilirsin? (yarınki derste öğreneceksin :) )
-  
+  skor 1 closure kullanmaktadır. Skor 1 de tanımlanan fonksiyon kendi parent ındaki variable a ulaşıp kullanabilmektedir. Bu da closure tanımıdır.
   3. Hangi durumda skor1 tercih edilebilir? Hangi durumda skor2 daha mantıklıdır?
+  skor 1 skorArtırıcı fonksiyonunu kullanarak çağırdığı skorGuncelle fonksiyonunu birden fazla değişkene tanımlayabiliriz. Böylece 1 den fazla değişken skorGüncelle fonksiyonunu kullanarak işlem yapabilir.
 */
 
 // skor1 kodları
@@ -64,8 +65,8 @@ Aşağıdaki takimSkoru() fonksiyonununda aşağıdakileri yapınız:
 Not: Bu fonskiyon, aşağıdaki diğer görevler için de bir callback fonksiyonu olarak da kullanılacak
 */
 
-function takimSkoru(/*Kodunuzu buraya yazınız*/){
-    /*Kodunuzu buraya yazınız*/
+function takimSkoru(){
+  return Math.floor(Math.random() * 15) +10 ;
 }
 
 
@@ -86,13 +87,19 @@ Aşağıdaki macSonucu() fonksiyonununda aşağıdakileri yapınız:
 }
 */ 
 
-function macSonucu(/*Kodunuzu buraya yazınız*/){
-  /*Kodunuzu buraya yazınız*/
-}
-
-
-
-
+function macSonucu(callback, ceyrekSayisi){
+  const sonuc = {
+    EvSahibi: 0,
+    KonukTakim:0,
+  };
+  for (let i = 1; i<=ceyrekSayisi; i++){
+    for(let takim in sonuc) {
+      sonuc[takim] += callback();
+      console.log(sonuc);
+    }
+  }
+return sonuc;
+ }
 
 
 /* Zorlayıcı Görev 4: periyotSkoru()
@@ -109,9 +116,16 @@ Aşağıdaki periyotSkoru() fonksiyonununda aşağıdakileri yapınız:
   */
 
 
-function periyotSkoru(/*Kodunuzu buraya yazınız*/) {
-  /*Kodunuzu buraya yazınız*/
-
+function periyotSkoru(callback) {
+  let skor = {
+    EvSahibi : 0,
+    KonukTakim: 0,
+};
+for (let taraf in skor) {
+  console.log(taraf,callback());
+  skor[taraf] = callback();
+}
+return skor;
 }
 
 
@@ -146,10 +160,8 @@ MAÇ UZAR ise skorTabelasi(periyotSkoru,takimSkoru,4)
 ] */
 // NOTE: Bununla ilgili bir test yoktur. Eğer logladığınız sonuçlar yukarıdakine benziyor ise tmamlandı sayabilirsiniz.
 
-function skorTabelasi(/*Kodunuzu buraya yazınız*/) {
-  /*Kodunuzu buraya yazınız*/
-}
-
+function skorTabelasi(periodScoreCb, teamScoreCb, quarter) {
+ }
 
 
 
